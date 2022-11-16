@@ -30,7 +30,7 @@
                             <li><a href="#">promotion</a></li>
                             <li><a href="#">pages</a></li>
                             <li><a href="#">blog</a></li>
-                            <li><a href="contact.html">contact</a></li>
+                            <li><a href="#">contact</a></li>
                         </ul>
                         <ul class="navbar_user">
                             <li class="checkout">
@@ -46,29 +46,30 @@
         </div>
     </header>
 
-    <!-- Slider -->
-
-	<div class="main_slider" style="background-image:url()">
-		<div class="container fill_height">
-			<div class="row align-items-center fill_height">
-				<div class="col">
-					<div class="main_slider_content">
-						<h1>Get up to 50% Off Black Friday</h1>
-						<div class="red_button shop_now_button"><a href="#">shop now</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Select type -->
+    
+    <div id="typePhone" class="type">
+        <div class="container">
+            <label for="phones">Select type:</label>
+            <select name="phones" id="phones" form="phoneform">
+                <option value="">Apple</option>
+                <option value="">Samsung</option>
+            </select>
+        </div>
+    </div>
 
     <!-- Products -->
-    <div id="product-list" class="product-grid row" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-        <!-- Product 1 -->
-        <!-- Product 2-->
-        <!-- Product 3 -->
-        <!-- Product 4 -->
-        <!-- Product n... -->
-    </div>
+    <div class="products">
+        <div class="container">
+            <div id="product-list" class="product-grid row">
+                <!-- Product 1 -->
+                <!-- Product 2-->
+                <!-- Product 3 -->
+                <!-- Product 4 -->
+                <!-- Product n... -->
+            </div>    
+        </div>    
+    </div>  
     
     <script src="./services/products.js"></script>
     <script src="./services/index.js"></script>

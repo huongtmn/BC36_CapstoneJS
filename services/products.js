@@ -1,9 +1,9 @@
 // Khai báo lớp đối tượng
-function Products(name, price, screen, blackCamera, frontCamera, img, desc, type) {
+function Products(name, price, screen, backCamera, frontCamera, img, desc, type) {
     this.name = name,
     this.price = price,
     this.screen = screen;
-    this.blackCamera = blackCamera;
+    this.backCamera = backCamera;
     this.frontCamera = frontCamera;
     this.img = img;
     this.desc = desc;
