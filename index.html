@@ -5,12 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- BS4 CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- MY CSS -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Main Navigation -->
+    <header class="main_nav_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <div class="logo_container">
+                        <a href="#">hightech<span>shop</span></a>
+                    </div>
+                    <nav class="navbar">
+                        <ul class="navbar_menu">
+                            <li><a href="#">home</a></li>
+                            <li><a href="#">shop</a></li>
+                            <li><a href="#">promotion</a></li>
+                            <li><a href="#">pages</a></li>
+                            <li><a href="#">blog</a></li>
+                            <li><a href="contact.html">contact</a></li>
+                        </ul>
+                        <ul class="navbar_user">
+                            <li class="checkout">
+                                <a href="#">
+                                    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                                    <span id="checkout_items" class="checkout_items"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slider -->
+
+	<div class="main_slider" style="background-image:url()">
+		<div class="container fill_height">
+			<div class="row align-items-center fill_height">
+				<div class="col">
+					<div class="main_slider_content">
+						<h1>Get up to 50% Off Black Friday</h1>
+						<div class="red_button shop_now_button"><a href="#">shop now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Products -->
+    <div id="product-list" class="product-grid row" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+        <!-- Product 1 -->
+        <!-- Product 2-->
+        <!-- Product 3 -->
+        <!-- Product 4 -->
+        <!-- Product n... -->
+    </div>
     
-
-
+    <script src="./services/products.js"></script>
+    <script src="./services/index.js"></script>
 </body>
 </html>
