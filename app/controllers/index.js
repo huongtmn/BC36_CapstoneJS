@@ -2,10 +2,17 @@ let productsService = new ProductsService();
 
 const domId = (id) => document.getElementById(id);
 
+let arrayProducts = [];
+
 let getProductList = () => {
   productsService.getList().then((response) => {
     renderProductList(response.data);
+    
+    for(var i = 0; i < response.data.length; i++){
+      arrayProducts.push(response.data[i]);
+    }
   });
+  return arrayProducts;
 };
 
 let renderProductList = (data) => {
@@ -32,39 +39,54 @@ let renderProductList = (data) => {
         `;
   }
   domId("product-list").innerHTML = content;
+
 };
-
-
 
 // FILTER SẢN PHẨM
 
-let arrayPhoneList = [];
-for (let i in getProductList) {
-  if (getProductList.hasOwnProperty(i)) {
-    arrayPhoneList.push(i);
-  }
-}
+// let arrayPhoneList = [];
 
-filterPhoneList = (type) => {
-  const data = this.arrayPhoneList.filter((element) => {
-    if (element.type === type) {
-      return true;
-    }
+// for (let i in getProductList) {
+//   if (getProductList.hasOwnProperty(i)) {
+//     arrayPhoneList.push(i);
+//   }
+// }
 
-    return false;
-  });
+// filterPhoneList = (type) => {
+//   let data = this.arrayPhoneList.filter((element) => {
+//     if (element.type === type) {
+//       return true;
+//     }
 
-  return data;
+//     return false;
+//   });
+
+//   return data;
+// };
+
+// domId("phones").onchange = (event) => {
+//   const value = event.target.value;
+
+//   let data = filterPhoneList(value);
+
+//   renderProductList(data);
+// };
+
+// FILTER SẢN PHẨM
+
+filterArrayByType = (type) => {
+  return arrayProducts.filter(el => el.type === type);
 };
 
 domId("phones").onchange = (event) => {
   const value = event.target.value;
+  if(value == "iphone" || value == "Samsung") {
+    let data = filterArrayByType(value);
 
-  const data = filterPhoneList(value);
-
-  renderProductList(data);
+    return renderProductList(data);
+  }
+  return getProductList();
 };
-
 
 window.onload = () => {
   getProductList();
