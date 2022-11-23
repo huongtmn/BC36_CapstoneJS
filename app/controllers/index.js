@@ -4,11 +4,14 @@ const domId = (id) => document.getElementById(id);
 
 let arrayProducts = [];
 
+let cart = [];
+
 let getProductList = () => {
   productsService.getList().then((response) => {
     renderProductList(response.data);
-    
-    for(var i = 0; i < response.data.length; i++){
+    renderOptions(response.data);
+
+    for (var i = 0; i < response.data.length; i++) {
       arrayProducts.push(response.data[i]);
     }
   });
@@ -34,54 +37,49 @@ let renderProductList = (data) => {
                              <div class="product_type" style="display: none;">${data[i].type}</div>
                         </div>
                      </div>
-                     <div id="btnAđ" class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                     <div id="btnAadd" class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                  </div>
         `;
   }
   domId("product-list").innerHTML = content;
-
 };
 
-// FILTER SẢN PHẨM
+// 4. FILTER PRODUCTS
 
-// let arrayPhoneList = [];
+function renderOptions(data) {
+  var content = `<option>Chọn loại</option>
+  <option value = ${data[0].type}>${data[0].type}</option>`;
 
-// for (let i in getProductList) {
-//   if (getProductList.hasOwnProperty(i)) {
-//     arrayPhoneList.push(i);
-//   }
-// }
+  let isDuplicate = false;
 
-// filterPhoneList = (type) => {
-//   let data = this.arrayPhoneList.filter((element) => {
-//     if (element.type === type) {
-//       return true;
-//     }
+  for (let i = 1; i < data.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (data[i].type === data[j].type) {
+        isDuplicate = true;
+        break;
+      }
+    }
+    if (!isDuplicate) {
+      content += `
+        <option value = ${data[i].type}>${data[i].type}</option>
+        `;
+    }
+  }
+  domId("phones").innerHTML = content;
+}
 
-//     return false;
-//   });
 
-//   return data;
-// };
-
-// domId("phones").onchange = (event) => {
-//   const value = event.target.value;
-
-//   let data = filterPhoneList(value);
-
-//   renderProductList(data);
-// };
-
-// FILTER SẢN PHẨM
-
-filterArrayByType = (type) => {
-  return arrayProducts.filter(el => el.type === type);
+var filterArrayByType = (type) => {
+  return arrayProducts.filter((el) => el.type === type);
 };
 
 domId("phones").onchange = (event) => {
   const value = event.target.value;
-  if(value == "iphone" || value == "Samsung") {
+  console.log(value);
+  if (value == "iphone" || value == "Samsung") {
     let data = filterArrayByType(value);
+
+    console.log(data);
 
     return renderProductList(data);
   }
@@ -92,6 +90,4 @@ window.onload = () => {
   getProductList();
 };
 
-
-
-
+// 5. THÊM SẢN PHẨM VÀO GIỎ HÀNG
