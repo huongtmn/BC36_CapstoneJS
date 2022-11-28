@@ -496,3 +496,53 @@ section
 	opacity: 1;
 }
 
+/* cart  */
+.cart {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	padding-top: 30px;
+}
+.cart h2 {
+	margin-bottom: 20px;
+}
+.cart img {
+	width: 70px;
+	height: auto;
+}
+.cart .tdName {
+	display: flex;
+	align-items: center;
+}
+.cart input {
+	width: 30px;
+	height: auto;
+	outline: none;
+
+}
+.cart .delete {
+	cursor: pointer;
+
+}
+.cart table {
+	width: 100%;
+}
+
+.cart table  thead tr th:first-child {
+	text-align: left;
+}
+.cart table tr td {
+	border-bottom: 2px solid #ddd;
+	padding: 12px 0;
+}
+.price-total p {
+	font-weight: bold;
+	color: black;
+	text-align: right;
+}
+.cart table  thead tr th:last-child {
+	text-align: right;
+}
+.cart table  tbody tr td:last-child {
+	text-align: right;
+}
