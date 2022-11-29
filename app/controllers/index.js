@@ -4,8 +4,6 @@ const domId = (id) => document.getElementById(id);
 
 let arrayProducts = [];
 
-let cart = [];
-
 let getProductList = () => {
   productsService.getList().then((response) => {
     renderProductList(response.data);
@@ -37,7 +35,7 @@ let renderProductList = (data) => {
                              <div class="product_type" style="display: none;">${data[i].type}</div>
                         </div>
                      </div>
-                     <div id="btnAadd" class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                     <buton onclick=addCart(${data[i].id}) id="btnAdd${data[i].id}" class="red_button add_to_cart_button"><a href="#">add to cart</a></buton>
                  </div>
         `;
   }
@@ -45,9 +43,8 @@ let renderProductList = (data) => {
 };
 
 // 4. FILTER PRODUCTS
-
-function renderOptions(data) {
-  var content = `<option>Chọn loại</option>
+const renderOptions = (data) => {
+  var content = `<option value="">Chọn loại</option>
   <option value = ${data[0].type}>${data[0].type}</option>`;
 
   let isDuplicate = false;
@@ -68,26 +65,141 @@ function renderOptions(data) {
   domId("phones").innerHTML = content;
 }
 
-
 var filterArrayByType = (type) => {
   return arrayProducts.filter((el) => el.type === type);
 };
 
 domId("phones").onchange = (event) => {
   const value = event.target.value;
-  console.log(value);
-  if (value == "iphone" || value == "Samsung") {
+ 
+  if (value == "") {
+    return getProductList();
+  } else {
     let data = filterArrayByType(value);
-
-    console.log(data);
-
     return renderProductList(data);
   }
-  return getProductList();
 };
 
+// 5-6-7. THÊM SẢN PHẨM VÀO GIỎ HÀNG
+let cart = [];
+
+const addCart = (id) => {
+  let product = arrayProducts.find(product => product.id == id);
+  let cartItem = new CartItem (
+    product,
+    1,
+  ); 
+  
+  let isExited = false;
+
+  if(cart.length == 0) {
+    cart.push(cartItem);
+    renderCart();
+  } else {
+    for(let i in cart) {
+      if(cart[i].product.id == cartItem.product.id){
+        isExited = true;
+        cart[i].quantity += 1;   
+        renderCart();
+        return cart;
+      } 
+    }
+    if(!isExited) {
+      cart.push(cartItem);
+      renderCart();
+      return cart;
+    }
+  }
+};
+
+// 8-10.
+const renderCart = () => {
+  let content1 = "";
+  let sum = [];
+
+  for(var i=0; i < cart.length; i++) {
+    // Tổng tiền thanh toán cho một mặt hàng
+    payPerItem = cart[i].product.price * cart[i].quantity;
+
+    content1 += `
+      <tr>
+        <td class="tdName">
+          <img src="${cart[i].product.img}" alt="">
+          <P>${cart[i].product.name}</P>
+        </td>
+        <td>
+          <p><span>$${cart[i].product.price}</span></p>
+        </td>
+        <td>
+          <div class="wrapper">
+            <span class="minus">-</span>
+            <span class="num">${cart[i].quantity}</span>
+            <span onclick="plusItem(${cart[i].id})" id="plusBtn${cart[i].id}" class="plus">+</span>
+          </div>
+        </td>
+        <td>
+          <p><span>$${payPerItem}</span></p>
+        </td>
+        <td>
+          <i class="fa-solid fa-trash-can"></i>
+        </td>
+      </tr>
+    `
+    
+    sum.push(payPerItem);
+  }
+
+  // Tổng tiền cần thanh toán cho tất cả mặt hàng
+  const totalPay = sum.reduce((partialSum, a) => partialSum + a, 0);
+  let content2 = `
+    <div class="price-total">
+      <p>Tổng tiền:<span> $${totalPay}</span></p>
+    </div>
+  `;
+
+  domId("cartBody").innerHTML = content1;
+  domId("totalPay").innerHTML = content2;
+
+  saveData();
+};
+
+// 11.
+// Lưu data xuống local storage
+const saveData = () => {
+  let cartJSON = JSON.stringify(cart);
+  
+  localStorage.setItem("CL", cartJSON);
+}
+
+// Lấy data từ local storage
+const getData = () => {
+  let cartJSON = localStorage.getItem("CL");
+  
+  if (!cartJSON) return;
+  
+  // chuyển chuỗi JSON thành mảng
+  let cartLocal = JSON.parse(cartJSON); 
+  cart = mapData(cartLocal);
+  
+  renderCart();
+}
+
+const mapData = (cartLocal) =>{
+  let result = [];
+  for(var i=0; i < cartLocal.length; i++){
+    var oldCart = cartLocal[i];
+    var newCart = new CartItem(
+      oldCart.product,
+      oldCart.quantity
+    );
+    result.push(newCart); 
+  }
+  return result;
+}
+
+// Onload page
 window.onload = () => {
   getProductList();
+  getData();
 };
 
-// 5. THÊM SẢN PHẨM VÀO GIỎ HÀNG
