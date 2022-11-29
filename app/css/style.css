@@ -497,7 +497,10 @@ section
 	opacity: 1;
 }
 
+<<<<<<< HEAD
 /* Cart Modal */
+=======
+>>>>>>> 5e06ebd3b4b0eeac5b562edce72a81efca03f6a7
 /* cart  */
 .cart {
 	width: 50%;
@@ -529,6 +532,7 @@ section
 .cart table {
 	width: 100%;
 }
+<<<<<<< HEAD
 .cart table  thead tr th:first-child {
 	text-align: left;
 }
@@ -536,6 +540,14 @@ section
 	vertical-align: middle;
 }
 .cart table tr td {
+=======
+
+.cart table  thead tr th:first-child {
+	text-align: left;
+}
+.cart table tr td {
+	border-bottom: 2px solid #ddd;
+>>>>>>> 5e06ebd3b4b0eeac5b562edce72a81efca03f6a7
 	padding: 12px 0;
 }
 .price-total p {
@@ -548,6 +560,7 @@ section
 }
 .cart table  tbody tr td:last-child {
 	text-align: right;
+<<<<<<< HEAD
 }
 #cartBody .wrapper {
 	margin: 0 auto;
@@ -572,3 +585,6 @@ section
 	border-left: 2px solid rgba(0,0,0,0.2);
 	pointer-events: none;
 }
+=======
+}
+>>>>>>> 5e06ebd3b4b0eeac5b562edce72a81efca03f6a7

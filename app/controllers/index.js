@@ -15,19 +15,19 @@ let getProductList = () => {
   });
   return arrayProducts;
 };
-
+// console.log(arrayProducts)
 let renderProductList = (data) => {
   let content = "";
   for (let i in data) {
     content += `
         <div class="col-3 product-item">
-                     <div class="product">
-                        <div class="product_image center">
-                            <img src="${data[i].img}" alt="">
-                        </div>
-                        <div class="product_info">
+              <div class="product">
+                    <div class="product_image center">
+                          <img src="${data[i].img}" alt="">
+                    </div>
+                    <div class="product_info">
                             <h6 class="product_name">${data[i].name}</h6>
-                             <div class="product_price">${data[i].price}</div>
+                             <div class="product_price">${data[i].price}<sup>$</sup></div>
                              <div class="product_screen">${data[i].screen}</div>
                              <div class="product_backCamera">${data[i].backCamera}</div>
                              <div class="product_frontCamera">${data[i].frontCamera}</div>
@@ -71,11 +71,12 @@ var filterArrayByType = (type) => {
 
 domId("phones").onchange = (event) => {
   const value = event.target.value;
- 
-  if (value == "") {
-    return getProductList();
-  } else {
+  // console.log(value);
+  if (value == "iphone" || value == "Samsung") {
     let data = filterArrayByType(value);
+
+    // console.log(data);
+
     return renderProductList(data);
   }
 };
