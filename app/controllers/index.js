@@ -87,15 +87,10 @@ const addCart = (id) => {
   } else {
     for(let i in cart) {
       if(cart[i].product.id == cartItem.product.id){
-        if(cart[i].quantity > 9) {
-          isExited = true;
-          alert("Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm cho một loại mặt hàng!");
-        } else {
-          isExited = true;
-          cart[i].quantity += 1;   
-          renderCart();
-          return cart;
-        }
+        isExited = true;
+        cart[i].quantity += 1;
+        renderCart();
+        return cart;
       } 
     }
     if(!isExited) {
@@ -128,7 +123,7 @@ const minusItem = (id) => {
     if(cart[i].product.id == id){
       if(cart[i].quantity < 2) {
         alert(`Sản phẩm ${cart[i].product.name} đã xóa khỏi giỏ hàng!!`);
-        cart.splice(i, 1); 
+        cart.splice(i, 1);
       } else {
         cart[i].quantity -= 1;
       }
@@ -169,11 +164,14 @@ const renderCart = () => {
           <p><span>$${payPerItem}</span></p>
         </td>
         <td>
-          <i class="fa-solid fa-trash-can"></i>
+          <button onclick="removeItem(${cart[i].product.id})" id="remove${cart[i].id}" class="btn-delete">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
         </td>
       </tr>
     `
     sum.push(payPerItem);
+
   }
 
   // Tổng tiền cần thanh toán cho tất cả mặt hàng
@@ -182,6 +180,7 @@ const renderCart = () => {
     <div class="price-total">
       <p>Tổng tiền:<span> $${totalPay}</span></p>
     </div>
+    
   `;
 
   domId("cartBody").innerHTML = content1;
@@ -222,7 +221,33 @@ const mapData = (cartLocal) =>{
     result.push(newCart); 
   }
   return result;
+ 
 }
+
+// 12. CLEAR VÀ THANH TOÁN GIỎ HÀNG
+let deleteAll = () => {
+  cart = [];
+  localStorage.removeItem("CL");
+  console.log("Da xoa thanh cong");
+
+  renderCart();
+  saveData();
+}
+
+
+// 13. XÓA SẢN PHẨM ĐÃ CHỌN
+let removeItem = (id)=> {
+  for(let i in cart) {
+    if(cart[i].product.id == id){
+      cart.splice(i, 1);
+    }   
+  }
+
+  renderCart();
+  saveData();
+}
+
+
 
 // Onload page
 window.onload = () => {

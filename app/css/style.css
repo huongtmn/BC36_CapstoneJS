@@ -626,6 +626,14 @@ section
     transition: all .4s ease-in-out;
 }
 
+.btn-delete {
+	width: 30px;
+	height: auto;
+	border-radius: 3px;
+	border: none;
+	background-color: #fff;
+
+}
 .btn-hover:focus {
     outline: none;
 }
