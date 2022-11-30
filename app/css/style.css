@@ -39,10 +39,8 @@ p
 	font-size: 14px;
 	line-height: 1.7;
 	font-weight: 500;
-	color: #989898;
+	color: black;
 	margin-bottom: 0;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
 p a
@@ -546,9 +544,6 @@ section
 .cart table  thead tr th:last-child {
 	text-align: right;
 }
-.cart table  tbody tr td:last-child {
-	text-align: right;
-}
 #cartBody .wrapper {
 	margin: 0 auto;
 }
@@ -571,4 +566,80 @@ section
 	border-right: 2px solid rgba(0,0,0,0.2);
 	border-left: 2px solid rgba(0,0,0,0.2);
 	pointer-events: none;
+}
+#cartBody i {
+	cursor: pointer;
+}
+/* Purchase and Clear btn */
+#clear p,
+#purchase p {
+	margin-right: 5px;
+	color: white;
+	font-size: 18px;
+}
+#purchase i {
+	color: white;
+}
+.buttons {
+    text-align: center;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
+.buttons #purchase {
+	color: black;
+	display: inline-flex;
+	align-items: center;
+    justify-content: center;
+	padding: 10px 20px;
+	background-color: #ccc;
+    border-radius: 8px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.buttons #clear {
+	display: inline-flex;
+	align-items: center;
+    justify-content: center;
+	padding: 10px 20px;
+	background-color: #ccc;
+    border-radius: 8px;
+	cursor: pointer;
+}
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.btn-hover.color-2 {
+	background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+#cartBody tr {
+	transition: all .4s ease-in-out;
+}
+#cartBody tr:hover {
+	background-color: rgba(117, 115, 115, 0.103);
 }

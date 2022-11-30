@@ -79,16 +79,26 @@
             <table class="table">
                 <thead class="thead-dark"> 
                     <tr>
-                        <th scope="col">Sản phẩm</th>
-                        <th scope="col">Đơn Giá</th>
-                        <th scope="col">Số Lượng</th>
-                        <th scope="col">Thành tiền</th>
-                        <th scope="col">Xóa</th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Unit price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total cost</th>
+                        <th scope="col">Remove</th>
                     </tr>
                 </thead>
                 <tbody id="cartBody"></tbody>
             </table>
             <div id="totalPay"></div>
+            <div class="row buttons">
+                <button class="col-3 btn-hover color-1" id="clear">
+                    <p>Clear</p>
+                    <span><i class="fa-solid fa-trash-can"></i></span>
+                </button>
+                <button class="col-3 btn-hover color-2" id="purchase">
+                    <p>Purchase</p>
+                    <span><i class="fa-regular fa-credit-card"></i></span>
+                </button>
+            </div>
         </form>
     </section>
 

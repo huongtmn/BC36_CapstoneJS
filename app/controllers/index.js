@@ -15,7 +15,7 @@ let getProductList = () => {
   });
   return arrayProducts;
 };
-// console.log(arrayProducts)
+
 let renderProductList = (data) => {
   let content = "";
   for (let i in data) {
@@ -35,7 +35,7 @@ let renderProductList = (data) => {
                              <div class="product_type" style="display: none;">${data[i].type}</div>
                         </div>
                      </div>
-                     <buton onclick=addCart(${data[i].id}) id="btnAdd${data[i].id}" class="red_button add_to_cart_button"><a href="#">add to cart</a></buton>
+                     <buton onclick=addCart(${data[i].id}) id="btnAdd${data[i].id}" class="red_button add_to_cart_button"><a href="#/">add to cart</a></buton>
                  </div>
         `;
   }
@@ -44,43 +44,31 @@ let renderProductList = (data) => {
 
 // 4. FILTER PRODUCTS
 const renderOptions = (data) => {
-  var content = `<option value="">Chọn loại</option>
-  <option value = ${data[0].type}>${data[0].type}</option>`;
+  let arrType = [...new Set(data.map(prod => prod.type))];
 
-  let isDuplicate = false;
+  let content = `<option value="ALL">All type</option>`;
 
-  for (let i = 1; i < data.length; i++) {
-    for (let j = 0; j < i; j++) {
-      if (data[i].type === data[j].type) {
-        isDuplicate = true;
-        break;
-      }
-    }
-    if (!isDuplicate) {
-      content += `
-        <option value = ${data[i].type}>${data[i].type}</option>
-        `;
-    }
+  for (let i in arrType) {
+    content += `<option value="${arrType[i]}">${arrType[i]}</option>`;
   }
   domId("phones").innerHTML = content;
 }
-
-var filterArrayByType = (type) => {
+  
+let filterArrayByType = (type) => {
   return arrayProducts.filter((el) => el.type === type);
 };
 
 domId("phones").onchange = (event) => {
   const value = event.target.value;
-  // console.log(value);
-  if (value == "iphone" || value == "Samsung") {
-    let data = filterArrayByType(value);
 
-    // console.log(data);
-
-    return renderProductList(data);
+  if (value == "ALL") {
+    return renderProductList(arrayProducts);
+  } else {
+    return renderProductList(filterArrayByType(value));
   }
 };
 
+/**CART */
 // 5-6-7. THÊM SẢN PHẨM VÀO GIỎ HÀNG
 let cart = [];
 
@@ -99,10 +87,15 @@ const addCart = (id) => {
   } else {
     for(let i in cart) {
       if(cart[i].product.id == cartItem.product.id){
-        isExited = true;
-        cart[i].quantity += 1;   
-        renderCart();
-        return cart;
+        if(cart[i].quantity > 9) {
+          isExited = true;
+          alert("Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm cho một loại mặt hàng!");
+        } else {
+          isExited = true;
+          cart[i].quantity += 1;   
+          renderCart();
+          return cart;
+        }
       } 
     }
     if(!isExited) {
@@ -113,7 +106,41 @@ const addCart = (id) => {
   }
 };
 
-// 8-10.
+// 9. CHỈNH SỬA SỐ LƯỢNG TRONG GIỎ HÀNG. MAX 10 ĐƠN VỊ MỘT LOẠI SẢN PHẨM
+// Tăng SL
+const plusItem = (id) => {
+  for(let i in cart) {
+    if(cart[i].product.id == id){
+      if(cart[i].quantity > 9) {
+        alert(`Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm ${cart[i].product.name}!!`);
+      } else {
+        cart[i].quantity += 1;
+      }
+    }
+  }
+  renderCart();
+  saveData();
+}
+
+// Giảm SL
+const minusItem = (id) => {
+  for(let i in cart) {
+    if(cart[i].product.id == id){
+      if(cart[i].quantity < 2) {
+        alert(`Sản phẩm ${cart[i].product.name} đã xóa khỏi giỏ hàng!!`);
+        cart.splice(i, 1); 
+      } else {
+        cart[i].quantity -= 1;
+      }
+    }   
+  }
+  renderCart();
+  saveData();
+}
+
+// 8-10. IN GIỎ HÀNG RA MÀN HÌNH, DUYỆT MẢNG CART. IN TỔNG TIỀN RA GIAO DIỆN
+
+// In giỏ hàng ra màn hình
 const renderCart = () => {
   let content1 = "";
   let sum = [];
@@ -133,9 +160,9 @@ const renderCart = () => {
         </td>
         <td>
           <div class="wrapper">
-            <span class="minus">-</span>
+            <span onclick="minusItem(${cart[i].product.id})" id="minusBtn${cart[i].product.id}" class="minus">-</span>
             <span class="num">${cart[i].quantity}</span>
-            <span onclick="plusItem(${cart[i].id})" id="plusBtn${cart[i].id}" class="plus">+</span>
+            <span onclick="plusItem(${cart[i].product.id})" id="plusBtn${cart[i].product.id}" class="plus">+</span>
           </div>
         </td>
         <td>
@@ -146,7 +173,6 @@ const renderCart = () => {
         </td>
       </tr>
     `
-    
     sum.push(payPerItem);
   }
 
@@ -164,7 +190,7 @@ const renderCart = () => {
   saveData();
 };
 
-// 11.
+// 11. LƯU MẢNG CART, LẤY DATA NGƯỢC LẠI TỪ LOCAL STORAGE
 // Lưu data xuống local storage
 const saveData = () => {
   let cartJSON = JSON.stringify(cart);
