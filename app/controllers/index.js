@@ -228,7 +228,6 @@ const mapData = (cartLocal) =>{
 let deleteAll = () => {
   cart = [];
   localStorage.removeItem("CL");
-  console.log("Da xoa thanh cong");
 
   renderCart();
   saveData();
