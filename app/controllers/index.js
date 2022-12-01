@@ -247,6 +247,13 @@ let removeItem = (id)=> {
 }
 
 
+let cartShow = ()=> {
+  document.querySelector(".cart").style.right = "0"
+}
+let cartBtn = ()=> {
+  document.querySelector(".cart").style.right = "-100%"
+}
+
 
 // Onload page
 window.onload = () => {

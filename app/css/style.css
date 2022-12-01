@@ -498,10 +498,15 @@ section
 /* Cart Modal */
 /* cart  */
 .cart {
-	width: 50%;
-	margin: auto;
+	height: 100vh;
+	width: 500px;
 	text-align: center;
 	padding-top: 30px;
+	position: fixed;
+	right: -100%;
+	top: 10px;
+	background-color: rgb(212, 194, 194);
+	overflow: scroll;
 }
 .cart h2 {
 	margin-bottom: 20px;
@@ -570,6 +575,20 @@ section
 #cartBody i {
 	cursor: pointer;
 }
+.cart i {
+	cursor: pointer;
+	padding-bottom: 10px;
+}
+.cart .content {
+	margin: 0 20px;
+	position: relative;
+}
+.cart .content .fa-xmark {
+	text-align: left;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
 /* Purchase and Clear btn */
 #clear p,
 #purchase p {
@@ -631,7 +650,7 @@ section
 	height: auto;
 	border-radius: 3px;
 	border: none;
-	background-color: #fff;
+	background-color:rgb(212, 194, 194);
 
 }
 .btn-hover:focus {
@@ -651,3 +670,4 @@ box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
 #cartBody tr:hover {
 	background-color: rgba(117, 115, 115, 0.103);
 }
+
