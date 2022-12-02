@@ -178,7 +178,7 @@ const renderCart = () => {
   const totalPay = sum.reduce((partialSum, a) => partialSum + a, 0);
   let content2 = `
     <div class="price-total">
-      <p>Tổng tiền:<span> $${totalPay}</span></p>
+      <p>Total:<span> $${totalPay}</span></p>
     </div>
     
   `;
