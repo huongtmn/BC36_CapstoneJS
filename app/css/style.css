@@ -567,11 +567,14 @@ section
 	color: white;
 }
 
-.cart h3 {
+/* .cart h3 {
 	display: none;
+} */
+
+.cart .textCart {
+	color: #d2dce6c0;
+	font-size: 25px;
 }
-
-
 
 .wrapper{
     max-width: 70px;

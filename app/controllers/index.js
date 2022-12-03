@@ -96,6 +96,7 @@ const addCart = (id) => {
       return cart;
     }
   }
+  textClearCart();
 };
 
 // 9. CHỈNH SỬA SỐ LƯỢNG TRONG GIỎ HÀNG. MAX 10 ĐƠN VỊ MỘT LOẠI SẢN PHẨM
@@ -225,6 +226,7 @@ let deleteAll = () => {
 
   renderCart();
   saveData();
+  textClearCart();
 };
 
 // 13. XÓA SẢN PHẨM ĐÃ CHỌN
@@ -237,6 +239,7 @@ let removeItem = (id) => {
 
   renderCart();
   saveData();
+  textClearCart();
 };
 
 let cartShow = () => {
@@ -248,12 +251,12 @@ let cartBtn = () => {
 
 let textClearCart = () => {
   if (cart.length == 0) {
-    document.querySelector("h3").style.display = "block";
-  } else {
-    document.querySelector("h3").style.display = "none";
-  }
+      return document.querySelector(".textCart").style.display = "block";
+    } else {
+      return document.querySelector(".textCart").style.display = "none";
+    }
 };
-textClearCart();
+
 
 let textPurchaseCart = () => {
   alert("Bạn đã mua hàng thành công");
@@ -262,6 +265,7 @@ let textPurchaseCart = () => {
 window.onload = () => {
   getProductList();
   getData();
+  textClearCart();
 };
 
 
