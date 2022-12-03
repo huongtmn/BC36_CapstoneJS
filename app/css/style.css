@@ -706,7 +706,7 @@ body {
   
   @keyframes gradient {
 	0% {
-	  background-position: 0% 50%;.navbar_menu li a
+	  background-position: 0% 50%;
 	}
 	50% {
 	  background-position: 100% 50%;
