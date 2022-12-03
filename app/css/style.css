@@ -566,6 +566,13 @@ section
 	margin: 0 auto;
 	color: white;
 }
+
+.cart h3 {
+	display: none;
+}
+
+
+
 .wrapper{
     max-width: 70px;
     display: flex;

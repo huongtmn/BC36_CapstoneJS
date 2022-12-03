@@ -44,7 +44,7 @@ let renderProductList = (data) => {
 
 // 4. FILTER PRODUCTS
 const renderOptions = (data) => {
-  let arrType = [...new Set(data.map(prod => prod.type))];
+  let arrType = [...new Set(data.map((prod) => prod.type))];
 
   let content = `<option value="ALL">All type</option>`;
 
@@ -52,8 +52,8 @@ const renderOptions = (data) => {
     content += `<option value="${arrType[i]}">${arrType[i]}</option>`;
   }
   domId("phones").innerHTML = content;
-}
-  
+};
+
 let filterArrayByType = (type) => {
   return arrayProducts.filter((el) => el.type === type);
 };
@@ -73,27 +73,24 @@ domId("phones").onchange = (event) => {
 let cart = [];
 
 const addCart = (id) => {
-  let product = arrayProducts.find(product => product.id == id);
-  let cartItem = new CartItem (
-    product,
-    1,
-  ); 
-  
+  let product = arrayProducts.find((product) => product.id == id);
+  let cartItem = new CartItem(product, 1);
+
   let isExited = false;
 
-  if(cart.length == 0) {
+  if (cart.length == 0) {
     cart.push(cartItem);
     renderCart();
   } else {
-    for(let i in cart) {
-      if(cart[i].product.id == cartItem.product.id){
+    for (let i in cart) {
+      if (cart[i].product.id == cartItem.product.id) {
         isExited = true;
         cart[i].quantity += 1;
         renderCart();
         return cart;
-      } 
+      }
     }
-    if(!isExited) {
+    if (!isExited) {
       cart.push(cartItem);
       renderCart();
       return cart;
@@ -104,10 +101,12 @@ const addCart = (id) => {
 // 9. CHỈNH SỬA SỐ LƯỢNG TRONG GIỎ HÀNG. MAX 10 ĐƠN VỊ MỘT LOẠI SẢN PHẨM
 // Tăng SL
 const plusItem = (id) => {
-  for(let i in cart) {
-    if(cart[i].product.id == id){
-      if(cart[i].quantity > 9) {
-        alert(`Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm ${cart[i].product.name}!!`);
+  for (let i in cart) {
+    if (cart[i].product.id == id) {
+      if (cart[i].quantity > 9) {
+        alert(
+          `Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm ${cart[i].product.name}!!`
+        );
       } else {
         cart[i].quantity += 1;
       }
@@ -115,23 +114,23 @@ const plusItem = (id) => {
   }
   renderCart();
   saveData();
-}
+};
 
 // Giảm SL
 const minusItem = (id) => {
-  for(let i in cart) {
-    if(cart[i].product.id == id){
-      if(cart[i].quantity < 2) {
+  for (let i in cart) {
+    if (cart[i].product.id == id) {
+      if (cart[i].quantity < 2) {
         alert(`Sản phẩm ${cart[i].product.name} đã xóa khỏi giỏ hàng!!`);
         cart.splice(i, 1);
       } else {
         cart[i].quantity -= 1;
       }
-    }   
+    }
   }
   renderCart();
   saveData();
-}
+};
 
 // 8-10. IN GIỎ HÀNG RA MÀN HÌNH, DUYỆT MẢNG CART. IN TỔNG TIỀN RA GIAO DIỆN
 
@@ -140,7 +139,7 @@ const renderCart = () => {
   let content1 = "";
   let sum = [];
 
-  for(var i=0; i < cart.length; i++) {
+  for (var i = 0; i < cart.length; i++) {
     // Tổng tiền thanh toán cho một mặt hàng
     payPerItem = cart[i].product.price * cart[i].quantity;
 
@@ -169,9 +168,8 @@ const renderCart = () => {
           </button>
         </td>
       </tr>
-    `
+    `;
     sum.push(payPerItem);
-
   }
 
   // Tổng tiền cần thanh toán cho tất cả mặt hàng
@@ -193,36 +191,32 @@ const renderCart = () => {
 // Lưu data xuống local storage
 const saveData = () => {
   let cartJSON = JSON.stringify(cart);
-  
+
   localStorage.setItem("CL", cartJSON);
-}
+};
 
 // Lấy data từ local storage
 const getData = () => {
   let cartJSON = localStorage.getItem("CL");
-  
-  if (!cartJSON) return;
-  
-  // chuyển chuỗi JSON thành mảng
-  let cartLocal = JSON.parse(cartJSON); 
-  cart = mapData(cartLocal);
-  
-  renderCart();
-}
 
-const mapData = (cartLocal) =>{
+  if (!cartJSON) return;
+
+  // chuyển chuỗi JSON thành mảng
+  let cartLocal = JSON.parse(cartJSON);
+  cart = mapData(cartLocal);
+
+  renderCart();
+};
+
+const mapData = (cartLocal) => {
   let result = [];
-  for(var i=0; i < cartLocal.length; i++){
+  for (var i = 0; i < cartLocal.length; i++) {
     var oldCart = cartLocal[i];
-    var newCart = new CartItem(
-      oldCart.product,
-      oldCart.quantity
-    );
-    result.push(newCart); 
+    var newCart = new CartItem(oldCart.product, oldCart.quantity);
+    result.push(newCart);
   }
   return result;
- 
-}
+};
 
 // 12. CLEAR VÀ THANH TOÁN GIỎ HÀNG
 let deleteAll = () => {
@@ -231,33 +225,41 @@ let deleteAll = () => {
 
   renderCart();
   saveData();
-}
-
+};
 
 // 13. XÓA SẢN PHẨM ĐÃ CHỌN
-let removeItem = (id)=> {
-  for(let i in cart) {
-    if(cart[i].product.id == id){
+let removeItem = (id) => {
+  for (let i in cart) {
+    if (cart[i].product.id == id) {
       cart.splice(i, 1);
-    }   
+    }
   }
 
   renderCart();
   saveData();
-}
+};
 
+let cartShow = () => {
+  document.querySelector(".cart").style.right = "0";
+};
+let cartBtn = () => {
+  document.querySelector(".cart").style.right = "-100%";
+};
 
-let cartShow = ()=> {
-  document.querySelector(".cart").style.right = "0"
-}
-let cartBtn = ()=> {
-  document.querySelector(".cart").style.right = "-100%"
-}
+let textClearCart = () => {
+  if (cart.length == 0) {
+    document.querySelector("h3").style.display = "block";
+  } else {
+    document.querySelector("h3").style.display = "none";
+  }
+};
+textClearCart();
 
-
+let textPurchaseCart = () => {
+  alert("Bạn đã mua hàng thành công");
+};
 // Onload page
 window.onload = () => {
   getProductList();
   getData();
 };
-

@@ -72,17 +72,18 @@
         <div class="content">
             <i onclick="cartBtn()" class="fa-solid fa-xmark"></i>
             <h2>CART</h2>
+            <h3>No item is selected</h3>
             <form action="">
                 <table class="table">
                     <tbody id="cartBody"></tbody>
                 </table>
                 <div id="totalPay"></div>
                 <div class="row buttons">
-                    <button onclick="deleteAll()" class="col-3 btn-hover color-1" id="clear">
+                    <button onclick="deleteAll()"  class="col-3 btn-hover color-1" id="clear">
                         <p>Clear</p>
                         <span><i class="fa-solid fa-trash-can"></i></span>
                     </button>
-                    <button onclick="deleteAll()" class="col-3 btn-hover color-2" id="purchase">
+                    <button onclick="deleteAll(); textPurchaseCart()" class="col-3 btn-hover color-2" id="purchase">
                         <p>Purchase</p>
                         <span><i class="fa-regular fa-credit-card"></i></span>
                     </button>
