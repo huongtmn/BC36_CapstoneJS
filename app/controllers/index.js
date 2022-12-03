@@ -263,3 +263,7 @@ window.onload = () => {
   getProductList();
   getData();
 };
+
+
+
+
