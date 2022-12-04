@@ -136,6 +136,7 @@ const minusItem = (id) => {
   }
   renderCart();
   saveData();
+  textClearCart();
 };
 
 // 8-10. IN GIỎ HÀNG RA MÀN HÌNH, DUYỆT MẢNG CART. IN TỔNG TIỀN RA GIAO DIỆN
