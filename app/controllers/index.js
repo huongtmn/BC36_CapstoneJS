@@ -84,10 +84,15 @@ const addCart = (id) => {
   } else {
     for (let i in cart) {
       if (cart[i].product.id == cartItem.product.id) {
-        isExited = true;
-        cart[i].quantity += 1;
-        renderCart();
-        return cart;
+        if(cart[i].quantity < 10){
+          isExited = true;
+          cart[i].quantity += 1;
+          renderCart();
+          return cart;
+        } else {
+          alert(`Bạn chỉ được chọn tối đa 10 đơn vị sản phẩm ${cart[i].product.name}!!`);
+          return;
+        }
       }
     }
     if (!isExited) {
