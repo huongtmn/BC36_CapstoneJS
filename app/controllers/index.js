@@ -245,6 +245,7 @@ let removeItem = (id) => {
 let cartShow = () => {
   document.querySelector(".cart").style.right = "0";
 };
+
 let cartBtn = () => {
   document.querySelector(".cart").style.right = "-100%";
 };
@@ -259,15 +260,17 @@ let textClearCart = () => {
 
 
 let textPurchaseCart = () => {
-  alert("Bạn đã mua hàng thành công");
+  console.log(cart.length);
+  if (cart.length == 0) {
+    alert("Chưa có sản phẩm nào.");
+  } else {
+    alert("Bạn đã mua hàng thành công");
+  }
 };
+
 // Onload page
 window.onload = () => {
   getProductList();
   getData();
   textClearCart();
 };
-
-
-
-

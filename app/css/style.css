@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+
 /* Fonts */
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,900');
@@ -713,15 +718,15 @@ body {
 	animation: gradient 15s ease infinite;
 	height: 100vh;
   }
-  
-  @keyframes gradient {
+
+@keyframes gradient {
 	0% {
-	  background-position: 0% 50%;
+		background-position: 0% 50%;
 	}
 	50% {
-	  background-position: 100% 50%;
+		background-position: 100% 50%;
 	}
 	100% {
-	  background-position: 0% 50%;
+		background-position: 0% 50%;
 	}
-  }
+}
