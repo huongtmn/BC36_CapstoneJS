@@ -239,6 +239,7 @@ let deleteAll = () => {
 let removeItem = (id) => {
   for (let i in cart) {
     if (cart[i].product.id == id) {
+      alert(`Sản phẩm ${cart[i].product.name} đã xóa khỏi giỏ hàng!!`);
       cart.splice(i, 1);
     }
   }
